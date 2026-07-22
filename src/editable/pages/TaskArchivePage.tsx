@@ -71,7 +71,7 @@ function pageHref(basePath: string, category: string, page: number) {
 
 const taskGrid: Record<TaskKey, string> = {
   article: 'grid gap-7 md:grid-cols-2 xl:grid-cols-3',
-  listing: 'grid gap-5 xl:grid-cols-2',
+  listing: 'grid gap-6',
   classified: 'grid gap-5 sm:grid-cols-2 xl:grid-cols-3',
   image: 'columns-1 gap-5 [column-fill:_balance] sm:columns-2 xl:columns-3',
   sbm: 'grid gap-5 md:grid-cols-2 xl:grid-cols-3',
@@ -181,7 +181,7 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
 
 function ArchivePostCard({ post, task, basePath, index }: { post: SitePost; task: TaskKey; basePath: string; index: number }) {
   const href = `${basePath}/${post.slug}` || buildPostUrl(task, post.slug)
-  if (task === 'listing') return <ListingArchiveCard post={post} href={href} />
+  if (task === 'listing') return <ListingArchiveCard post={post} href={href} index={index} />
   if (task === 'classified') return <ClassifiedArchiveCard post={post} href={href} />
   if (task === 'image') return <ImageArchiveCard post={post} href={href} index={index} />
   if (task === 'sbm') return <BookmarkArchiveCard post={post} href={href} index={index} />
@@ -255,27 +255,29 @@ function ArticleArchiveCard({ post, href, index }: { post: SitePost; href: strin
   )
 }
 
-function ListingArchiveCard({ post, href }: { post: SitePost; href: string }) {
-  const logo = getImages(post)[0]
+function ListingArchiveCard({ post, href, index }: { post: SitePost; href: string; index: number }) {
+  const image = getImages(post)[0]
   const location = getField(post, ['location', 'address', 'city'])
   const phone = getField(post, ['phone', 'telephone', 'mobile'])
   const website = getField(post, ['website', 'url'])
+  const category = getCategory(post, 'Local business')
   return (
-    <Link href={href} className={`${cardBase} flex items-center gap-5 p-5 sm:p-6`}>
-      <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-[1rem] border border-[var(--tk-line)] bg-[var(--tk-raised)]">
-        {logo ? <img src={logo} alt="" className="h-full w-full object-cover" /> : <BriefcaseBusiness className="h-9 w-9 text-[var(--tk-muted)]" />}
+    <Link href={href} className="group grid min-w-0 gap-5 overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:border-[#4267e9] hover:shadow-[0_22px_60px_rgba(17,27,43,.12)] sm:grid-cols-[240px_minmax(0,1fr)]">
+      <div className="relative aspect-[16/11] overflow-hidden rounded-[1.4rem] bg-[linear-gradient(135deg,#eef2ff,#fff4d6)] sm:aspect-auto sm:min-h-[220px]">
+        {image ? <img src={image} alt={post.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" /> : <div className="absolute inset-0 grid place-items-center"><BriefcaseBusiness className="h-12 w-12 text-[#4267e9]/30" /></div>}
       </div>
-      <div className="min-w-0 flex-1">
-        <h2 className="editable-display truncate text-xl font-semibold tracking-[-0.02em]">{post.title}</h2>
+      <div className="min-w-0 p-2 sm:py-5 sm:pr-5">
+        <div className="flex flex-wrap items-center gap-2 text-[11px] font-extrabold uppercase tracking-[.2em] text-[#4267e9]"><span>{category}</span><span className="text-slate-400">· Listing {String(index + 1).padStart(2, '0')}</span></div>
+        <h2 className="mt-3 line-clamp-2 text-2xl font-extrabold leading-tight tracking-tight text-[#111b2b] sm:text-3xl">{post.title}</h2>
         <RatingLine post={post} />
-        <p className="mt-2 line-clamp-1 text-sm leading-6 text-[var(--tk-muted)]">{getSummary(post)}</p>
-        <div className="mt-3 flex flex-wrap gap-3 text-xs font-medium text-[var(--tk-muted)]">
-          {location ? <span className="inline-flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[var(--tk-accent)]" /> {location}</span> : null}
-          {phone ? <span className="inline-flex items-center gap-1.5"><Phone className="h-3.5 w-3.5 text-[var(--tk-accent)]" /> {phone}</span> : null}
-          {website ? <span className="inline-flex items-center gap-1.5"><Globe className="h-3.5 w-3.5 text-[var(--tk-accent)]" /> Website</span> : null}
+        <p className="mt-3 line-clamp-2 text-sm leading-7 text-slate-500">{getSummary(post)}</p>
+        <div className="mt-4 flex flex-wrap gap-3 text-xs font-bold text-slate-500">
+          {location ? <span className="inline-flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 text-[#d98b00]" /> {location}</span> : null}
+          {phone ? <span className="inline-flex items-center gap-1.5"><Phone className="h-3.5 w-3.5 text-[#d98b00]" /> {phone}</span> : null}
+          {website ? <span className="inline-flex items-center gap-1.5"><Globe className="h-3.5 w-3.5 text-[#d98b00]" /> Website</span> : null}
         </div>
+        <span className="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#4267e9]">View listing <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1"/></span>
       </div>
-      <ArrowUpRight className="h-5 w-5 shrink-0 text-[var(--tk-muted)] transition group-hover:text-[var(--tk-accent)]" />
     </Link>
   )
 }

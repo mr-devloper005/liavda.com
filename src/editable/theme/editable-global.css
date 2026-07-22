@@ -12,7 +12,7 @@
   Do not add data fetching, scripts, or route logic here.
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
 
 /* Per-task display + body typefaces (consumed via task-themes.ts). */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap');
@@ -26,8 +26,8 @@ body {
 
 .editable-site-root {
   /* Yelp-style clean sans, used for both display and body. */
-  --editable-font-display: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  --editable-font-body: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --editable-font-display: 'Manrope', system-ui, sans-serif;
+  --editable-font-body: 'Manrope', system-ui, sans-serif;
   /* Premium easing curve used across every hover + transition. */
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
   font-family: var(--editable-font-body);
@@ -97,9 +97,32 @@ body {
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--slot4-accent-fill) 28%, transparent);
-  color: var(--slot4-page-text);
+  background: #ffd45c;
+  color: #111b2b;
 }
+
+::-moz-selection { background: #ffd45c; color: #111b2b; }
+
+.editable-site-root a:focus-visible,
+.editable-site-root button:focus-visible,
+.editable-site-root input:focus-visible,
+.editable-site-root select:focus-visible,
+.editable-site-root textarea:focus-visible {
+  outline: 3px solid #ffd45c;
+  outline-offset: 3px;
+}
+
+.liavda-topic,.liavda-horizontal { transition: transform .35s var(--ease-premium), box-shadow .35s var(--ease-premium), border-color .35s; }
+.liavda-topic:hover,.liavda-horizontal:hover { transform: translateY(-5px); border-color:#4267e9; box-shadow:0 18px 45px rgba(17,27,43,.12); }
+@keyframes liavdaHeroFade { 0%,28%{opacity:1;transform:scale(1)} 34%,94%{opacity:0;transform:scale(1.08)} 100%{opacity:1;transform:scale(1)} }
+.liavda-hero-image { animation:liavdaHeroFade 18s infinite; }
+.hero-frame-1 { animation-delay:6s; opacity:0; }
+.hero-frame-2 { animation-delay:12s; opacity:0; }
+@keyframes liavdaMarquee { to { transform:translateX(calc(-50% - .625rem)); } }
+.liavda-marquee { animation:liavdaMarquee 38s linear infinite; padding-inline:10px; }
+.liavda-marquee:hover { animation-play-state:paused; }
+
+@media (prefers-reduced-motion: reduce) { .liavda-hero-image,.liavda-marquee { animation:none !important; } }
 
 ::-webkit-scrollbar-track {
   background: color-mix(in oklab, var(--slot4-page-bg) 88%, black);
