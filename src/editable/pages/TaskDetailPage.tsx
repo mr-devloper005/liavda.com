@@ -220,29 +220,28 @@ function ListingDetail({ post, related }: { post: SitePost; related: SitePost[] 
   const website = getField(post, ['website', 'url'])
   const mapSrc = mapSrcFor(post)
   return (
-    <section className="mx-auto max-w-[var(--editable-container)] px-6 py-14 sm:py-20 lg:px-8">
+    <section className="mx-auto max-w-5xl px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
       <BackLink task="listing" />
-      <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_380px]">
-        <article className="min-w-0">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-            <div className="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-[var(--tk-radius)] border border-[var(--tk-line)] bg-[var(--tk-raised)]">
-              {logo ? <img src={logo} alt="" className="h-full w-full object-cover" /> : <Building2 className="h-12 w-12 text-[var(--tk-muted)]" />}
+      <div className="mt-8 grid gap-8">
+        <article className="min-w-0 overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white p-6 shadow-[0_24px_80px_rgba(17,27,43,.1)] sm:p-9 lg:p-11">
+          <div className="flex flex-col gap-7 rounded-[2rem] bg-[#111b2b] p-6 text-white sm:flex-row sm:items-center sm:p-8">
+            <div className="flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5">
+              {logo ? <img src={logo} alt={post.title} className="h-full w-full object-cover" /> : <Building2 className="h-12 w-12 text-[#ffb300]" />}
             </div>
             <div className="min-w-0">
               <Kicker task="listing">Business listing</Kicker>
-              <h1 className="editable-display mt-4 text-4xl font-semibold leading-[1.04] tracking-[-0.03em] sm:text-5xl">{post.title}</h1>
+              <h1 className="mt-4 text-4xl font-extrabold leading-[1.04] tracking-tight sm:text-5xl lg:text-6xl">{post.title}</h1>
               <DetailMeta post={post} category={getField(post, ['category'])} />
             </div>
           </div>
-          {leadText(post) ? <p className="mt-7 max-w-2xl text-lg leading-8 text-[var(--tk-muted)]">{leadText(post)}</p> : null}
+          {leadText(post) ? <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-500">{leadText(post)}</p> : null}
           <InfoGrid items={[['Location', address, MapPin], ['Phone', phone, Phone], ['Email', email, Mail], ['Website', website, Globe2]]} />
           <Divider />
           <BodyContent post={post} />
-          <ImageStrip images={images.slice(1)} label="Showcase" />
+          <ImageStrip images={images.slice(1)} label="Business gallery" />
         </article>
-        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+        <aside className="grid gap-6 md:grid-cols-2">
           {mapSrc ? <MapBox src={mapSrc} label={address || post.title} /> : null}
-          <ContactAction website={website} phone={phone} email={email} />
           <RelatedPanel task="listing" post={post} related={related} />
         </aside>
       </div>
@@ -567,4 +566,3 @@ function RelatedCard({ task, post, grid = false }: { task: TaskKey; post: SitePo
     </Link>
   )
 }
-

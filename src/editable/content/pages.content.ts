@@ -3,11 +3,11 @@ import { slot4BrandConfig } from '@/editable/theme/brand.config'
 export const pagesContent = {
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
-      description: 'Explore articles, images, listings, and curated posts through a cleaner reading-first experience.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
-      openGraphDescription: 'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+      title: 'Useful articles and local business discovery',
+      description: 'Read practical articles and discover local businesses, services, and classified listings on Liavda.',
+      openGraphTitle: 'Liavda — read, discover, connect',
+      openGraphDescription: 'Practical articles and useful local business information in one connected place.',
+      keywords: ['local business directory', 'practical articles', 'classified listings', 'business discovery'],
     },
     hero: {
       badge: 'Latest stories and visuals',

@@ -8,12 +8,12 @@ export const globalContent = {
     baseUrl: slot4BrandConfig.baseUrl,
   },
   nav: {
-    tagline: 'Independent reading platform',
+    tagline: 'Read · discover · connect',
     primaryLinks: [
-      { label: 'Articles', href: '/articles' },
-      { label: 'Visuals', href: '/image-sharing' },
-      { label: 'Listings', href: '/listings' },
-      { label: 'Contact', href: '/contact' },
+      { label: 'Classified', href: '/classified' },
+      { label: 'Home', href: '/' },
+      { label: 'About', href: '/about' },
+      { label: 'Search', href: '/search' },
     ],
     actions: {
       primary: { label: 'Start exploring', href: '/' },
@@ -22,7 +22,7 @@ export const globalContent = {
   },
   footer: {
     tagline: 'Stories, resources, and discoverable posts',
-    description: 'A connected publishing surface for articles, visuals, listings, profiles, bookmarks, and downloadable resources.',
+    description: 'Practical articles and local business information for easier research, comparison, and discovery.',
     columns: [
       {
         title: 'Explore',

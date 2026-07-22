@@ -52,9 +52,26 @@ const base = {
   radius: '0.75rem',
 } satisfies Omit<TaskTheme, 'kicker' | 'note'>
 
+const liavdaEditorial = {
+  ...base,
+  fontDisplay: "'Manrope', system-ui, sans-serif",
+  fontBody: "'Manrope', system-ui, sans-serif",
+  bg: '#f5f7fb',
+  surface: '#ffffff',
+  raised: '#eef2ff',
+  text: '#111b2b',
+  muted: '#64748b',
+  line: '#dbe3f0',
+  accent: '#4267e9',
+  accentSoft: '#fff4d6',
+  onAccent: '#ffffff',
+  glow: 'rgba(66,103,233,0.18)',
+  radius: '1.5rem',
+} satisfies Omit<TaskTheme, 'kicker' | 'note'>
+
 export const taskThemes: Record<TaskKey, TaskTheme> = {
-  article: { ...base, kicker: 'Articles', note: 'In-depth reads, guides and stories worth your time.' },
-  listing: { ...base, kicker: 'Businesses', note: 'Find, compare and connect with local businesses.' },
+  article: { ...liavdaEditorial, kicker: 'Articles', note: 'In-depth reads, guides and stories worth your time.' },
+  listing: { ...liavdaEditorial, kicker: 'Businesses', note: 'Find, compare and connect with local businesses.' },
   classified: { ...base, kicker: 'Marketplace', note: 'Fresh offers and listings, ready to act on.' },
   image: { ...base, kicker: 'Photos', note: 'A visual feed of standout images and galleries.' },
   sbm: { ...base, kicker: 'Bookmarks', note: 'Curated resources and links worth saving.' },
